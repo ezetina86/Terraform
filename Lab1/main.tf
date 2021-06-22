@@ -21,7 +21,7 @@ resource "aws_instance" "Ubuntu" {
   }
 }
 
-# Destroy a resource 
+# Destroying a resource 
 /*
 resource "aws_instance" "AWS-Linux" {
   ami           = "ami-0aeeebd8d2ab47354"
