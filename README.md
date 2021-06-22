@@ -1,2 +1,3 @@
 # Terraform
-Terraform exercises
+Terraform exercises by Enrique Zetina
+2021
