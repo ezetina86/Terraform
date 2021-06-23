@@ -1,7 +1,9 @@
 
-#--------------------
-# Terraform certification Lab1
-#--------------------
+#------------------------------------------------------------
+# Preparation for Terraform certification
+# Deploy EC2 instance AWS
+# @author: Enrique Zetina
+#------------------------------------------------------------
 
 provider "aws" {
 #Overwritting  my default region

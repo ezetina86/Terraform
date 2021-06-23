@@ -1,3 +1,10 @@
+#------------------------------------------------------------
+# Preparation for Terraform certification
+# Deploy a GCE instance in GCP
+# @author: Enrique Zetina
+#------------------------------------------------------------
+
+
 provider "google" {
   project = "terraform-certification-ez"
   region  = "us-central1"
