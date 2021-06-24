@@ -14,7 +14,7 @@ provider "google" {
 
 #Adding a  GCE instance in GCP
 
-resource "google_compute_instance" "webserver" {
+resource "google_compute_instance" "webserver2" {
   name         = "webserver"
   machine_type = "e2-micro"
   zone         = "us-central1-a"
@@ -23,28 +23,17 @@ resource "google_compute_instance" "webserver" {
 
   boot_disk {
     initialize_params {
-      image = "centos-cloud/centos-7"
+      image = "debian-cloud/debian-9"
     }
   }
 
-  metadata = {
-    # This is not working at this point
-    #startup-script-url = "gs://startup-script-ez/startup.sh"
-
-    #Trying with the script directly
-    metadata_startup_script = <<SCRIPT
-#!/bin/bash
-touch test.txt
-echo "The script should work!" > test.txt
-sudo yum -y update
-sudo yum -y install httpd
-sudo chown -R $USER:$USER /var/www
-sudo echo "<h2>Web server GCP</h2><br>Built by Terrform" > /var/www/html/index.html
-sudo service httpd start
-sudo chkconfig httpd on
-SCRIPT
-  }
-
+  metadata_startup_script = <<EOF
+  #! /bin/bash
+  apt update
+  apt -y install apache2
+  cat <<EOF > /var/www/html/index.html
+  <html><body><p>Webserver deployed in GCP by Terrafrom!</p></body></html>
+  EOF
   network_interface {
     network = "default"
 

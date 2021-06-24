@@ -1,4 +1,6 @@
-#!/bin/bash
+#! /bin/bash
+touch test.txt
+echo "Test" > test.txt
 sudo yum -y update
 sudo yum -y install httpd
 sudo chown -R $USER:$USER /var/www
