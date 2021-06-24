@@ -32,7 +32,7 @@ resource "google_compute_instance" "webserver2" {
   apt update
   apt -y install apache2
   cat <<EOF > /var/www/html/index.html
-  <html><body><p>Webserver deployed in GCP by Terrafrom!</p></body></html>
+  <html><body><p>Webserver deployed in GCP with Terrafrom!</p></body></html>
   EOF
   network_interface {
     network = "default"
