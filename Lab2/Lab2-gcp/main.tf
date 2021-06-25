@@ -2,7 +2,6 @@
 # Preparation for Terraform certification
 # Build a Webserver with Bootstrap GCP
 # @author: Enrique Zetina
-# @status; NOT WORKING, the stratup scrips is not working
 #------------------------------------------------------------
 
 
