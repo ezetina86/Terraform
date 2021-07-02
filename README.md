@@ -10,7 +10,7 @@
 ---
 ##### Laboratory #1 #####
 
-Use a AWS provider to deploy simle EC2 instance.
+Use a AWS provider to deploy simple EC2 instance.
 
 ```javascript
 provider "aws" {
