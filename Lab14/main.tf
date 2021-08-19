@@ -2,11 +2,11 @@
 # Preparation for Terraform certification
 # High availability server
 # @author: Enrique Zetina
-# Update servers via blue/green deployment (zero downtime!)
+# Working with variables
 #------------------------------------------------------------
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 data "aws_availability_zones" "working" {}
@@ -23,7 +23,7 @@ data "aws_ami" "latest_amazon_linux" {
 resource "aws_security_group" "web" {
   name = "Web Security Group"
   dynamic "ingress" {
-    for_each = ["80", "443"]
+    for_each = var.port_list
     content {
       from_port   = ingress.value
       to_port     = ingress.value
@@ -46,7 +46,7 @@ resource "aws_security_group" "web" {
 resource "aws_launch_configuration" "web" {
   name_prefix     = "WebServer-Highly-Available-LC-"
   image_id        = data.aws_ami.latest_amazon_linux.id
-  instance_type   = "t2.micro"
+  instance_type   = var.instance_type
   security_groups = [aws_security_group.web.id]
   user_data       = file("user_data.sh")
 
@@ -98,10 +98,9 @@ resource "aws_elb" "web" {
     target              = "HTTP:80/"
     interval            = 10
   }
-  tags = {
-    Name  = "WebServer-HighlyAvailable-ELB"
-    Owner = "Enrique Zetina"
-  }
+  tags = merge(var.tags, {
+    Name = "${var.tags["Environment"]}-WebServer-HighlyAvailable-ELB"
+  })
 }
 
 resource "aws_default_subnet" "default_az1" {
@@ -112,6 +111,3 @@ resource "aws_default_subnet" "default_az2" {
   availability_zone = data.aws_availability_zones.working.names[1]
 }
 
-output "web_loadbalancer_url" {
-  value = aws_elb.web.dns_name
-}
