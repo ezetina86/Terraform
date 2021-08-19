@@ -2,7 +2,7 @@
 # Preparation for Terraform certification
 # High availability server
 # @author: Enrique Zetina
-# Working with variables
+# Working with variables!
 #------------------------------------------------------------
 
 provider "aws" {
