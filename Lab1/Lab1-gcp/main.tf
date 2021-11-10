@@ -6,7 +6,7 @@
 
 
 provider "google" {
-  project = "terraform-certification-ez"
+  project = "data-support-ez"
   region  = "us-central1"
   zone    = "us-central1-c"
 }
